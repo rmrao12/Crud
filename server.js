@@ -1,19 +1,21 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import morgan from 'morgan';
-const app=express();
-dotenv.config()
-let port=process.env.PORT
+import morgan from 'morgan'
+import connectDb from './config/db.js';
 
-app.use(morgan(":method :url :status :res[content-length] - :response-time ms"))
-app.get('/get',(req,res)=>{
-  res.send('Api Resonse Got')
-  
-})
-//using data in form of json
+const app = express();
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
+    app.get('/', (req, res) => {
+    res.send('Hello, World!');
+  })
+dotenv.config()
+
+let port = process.env.PORT;
+
 app.use(express.json());
 
-//make server
-app.listen(port,()=>{
-  console.log("Server is started:",port)
+connectDb();
+
+app.listen(port, ()=>{
+    console.log("Expess Server is started on Port:", port)
 })
