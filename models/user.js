@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 const userSchema=mongoose.Schema;
 
-const user=userSchema({
+const user= new userSchema({
     name:{type:String,required:true},
     email:{type:String,required:true,unique:true},
     password:{type:String,required:true,
